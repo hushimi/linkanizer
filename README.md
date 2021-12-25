@@ -1,29 +1,30 @@
 # linkanizer
 
-## Project setup
+# setup memo
+
 ```
-yarn install
+vue create linkanizer
+vue add electron-builder
 ```
 
-### Compiles and hot-reloads for development
+# start electron
+
 ```
-yarn serve
+yarn run electron:serve
+yarn run electron:build
 ```
 
-### Compiles and minifies for production
-```
-yarn build
-```
+# TODO
 
-### Run your unit tests
-```
-yarn test:unit
-```
+- [x] prepare composition api
+- [ ] IPC set up(show memory usage on cpuUsage.vue)
+- [ ] SCSS set up
+- [ ] Fontawesome install
+- [ ] upload to my github
+- [ ] Side Menu Style(like REECH DB)
 
-### Lints and fixes files
-```
-yarn lint
-```
+# Memo
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- FrontEndProcess: VueJS(ipcRenderer)
+- BackEndProcess: background.js(ipcMain)
+- Use ContextBridge to communicate with BackGroundProcess
