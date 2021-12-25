@@ -7,7 +7,7 @@
 
 <script>
 import { defineComponent } from 'vue'
-import CpuUsage from '@/components/cpuUsage.vue'
+import CpuUsage from '@/renderer/components/cpuUsage.vue'
 
 export default defineComponent({
   components: {
