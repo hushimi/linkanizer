@@ -5,4 +5,11 @@ module.exports = {
       rendererProcessFile: 'src/renderer/main.js',
     },
   },
+  css: {
+    loaderOptions: {
+      sass: {
+        additionalData: '@import "~@/renderer/assets/styles/root.scss";'
+      },
+    }
+  },
 }

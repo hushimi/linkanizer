@@ -3,9 +3,11 @@
 import { app, protocol, BrowserWindow } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
+
 const isDevelopment = process.env.NODE_ENV !== 'production'
 const { ipcMain } = require('electron')
 const os = require('os-utils')
+// const ipcProc = require('./ipcprocess')
 const path = require('path')
 // const fs = require('fs')
 
@@ -20,7 +22,7 @@ protocol.registerSchemesAsPrivileged([
 // create main window
 // ------------------------------------
 async function createWindow() {
-  const win = new BrowserWindow({
+  const mainWindow = new BrowserWindow({
     backgroundColor: '#fff',
     width: 1200,
     height: 1000,
@@ -36,24 +38,22 @@ async function createWindow() {
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
-    await win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
-    if (!process.env.IS_TEST) win.webContents.openDevTools()
+    await mainWindow.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
+    if (!process.env.IS_TEST) mainWindow.webContents.openDevTools()
   } else {
     createProtocol('app')
     // Load the index.html when not in development
-    win.loadURL('app://./index.html')
+    mainWindow.loadURL('app://./index.html')
   }
 
+  // IPC test
   setInterval(() => {
     os.cpuUsage(function (v) {
-      win.webContents.send('usage', {
+      mainWindow.webContents.send('usage', {
         'cpu': (v*100).toFixed(2),
         'mem': (os.freememPercentage()*100).toFixed(2),
         'totalmem': (os.totalmem()/1024).toFixed(2)
       })
-      // win.webContents.send('cpu', (v*100).toFixed(2))
-      // win.webContents.send('mem', (os.freememPercentage()*100).toFixed(2))
-      // win.webContents.send('totalmem', (os.totalmem()/1024).toFixed(2))
     })
   }, 1000)
 }
@@ -105,7 +105,8 @@ if (isDevelopment) {
 }
 
 // -----------------------------------------
-// Handle IPC process
+// Handle IPC call
+// TODO write process on external file
 // -----------------------------------------
 ipcMain.on('READ_FILE', (event, payload) => {
   // const content = fs.readFileSync(payload.path)

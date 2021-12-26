@@ -3,6 +3,7 @@
 ## version
 
 - node: 16.13.1
+- vue-cli: 4.5.13
 - vue: 3.0.0
 - electron: 13.0.0
 
@@ -39,8 +40,10 @@ yarn run electron:build
   2. add IPC handler at background/main.js
   3. when receive data use 'ipcMain.on' or window.ipc.on
   4. when send data use 'ipcMain.send' or window.ipc.send
-  5. background/main.js will judge valid channel and execute function
+  5. public/preload.js will judge valid channel and execute function
 
 # Reference
 
+- [Electron Document](https://www.electronjs.org/ja/docs/latest/api/app)
 - [Setup Electron and vue](https://medium.com/swlh/how-to-safely-set-up-an-electron-app-with-vue-and-webpack-556fb491b83)
+- [fontawesome](https://byceclorets.com/vue/font-awesome/)

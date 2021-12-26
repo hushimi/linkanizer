@@ -1,6 +1,6 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
+  <div id="home">
+    <fa icon="phone" class="fa-icon" />
     <p>{{ cpu }}</p>
     <p>{{ mem }}</p>
     <p>{{ total_mem }}</p>

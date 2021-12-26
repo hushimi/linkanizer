@@ -1,0 +1,46 @@
+// scss変数
+@import "variables";
+
+// ----------------------------------
+// デフォルトスタイル修正
+// ----------------------------------
+html {
+  box-sizing: border-box;
+  height: 100%;
+}
+body {
+  height: 100%;
+  background: $primary;
+  color: $accent;
+}
+* {
+  outline: none !important;
+}
+a {
+  text-decoration: none;
+}
+input[type="radio"]:focus {
+  outline: none;
+  box-shadow: none;
+}
+input[type="checkbox"]:focus {
+  outline: none;
+  box-shadow: none;
+}
+input[type="text"]:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+// ----------------------------------
+// 共通パーツ
+// ----------------------------------
+.fa-icon {
+  height: 24px;
+  width: 24px;
+  color: $accent;
+}
+
+#home {
+  color: $accent;
+}
