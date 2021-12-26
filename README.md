@@ -1,5 +1,15 @@
 # linkanizer
 
+## version
+
+- node: 16.13.1
+- vue: 3.0.0
+- electron: 13.0.0
+
+## Libraries
+
+- os-utils
+
 # setup memo
 
 ```
@@ -14,17 +24,23 @@ yarn run electron:serve
 yarn run electron:build
 ```
 
-# TODO
+# style Rule
 
-- [x] prepare composition api
-- [ ] IPC set up(show memory usage on cpuUsage.vue)
-- [ ] SCSS set up
-- [ ] Fontawesome install
-- [ ] upload to my github
-- [ ] Side Menu Style(like REECH DB)
+- views style within \*.scss file
+- components style within it's own vue file
 
 # Memo
 
-- FrontEndProcess: VueJS(ipcRenderer)
-- BackEndProcess: background.js(ipcMain)
-- Use ContextBridge to communicate with BackGroundProcess
+- BackEnd Process: background/main.js
+- Renderer Process: renderer/main.js(display vuejs content)
+- Use ContextBridge to communicate with BackGroundProcess(preload.js)
+- set up IPC func
+  1. add channel on preload.js
+  2. add IPC handler at background/main.js
+  3. when receive data use 'ipcMain.on' or window.ipc.on
+  4. when send data use 'ipcMain.send' or window.ipc.send
+  5. background/main.js will judge valid channel and execute function
+
+# Reference
+
+- [Setup Electron and vue](https://medium.com/swlh/how-to-safely-set-up-an-electron-app-with-vue-and-webpack-556fb491b83)

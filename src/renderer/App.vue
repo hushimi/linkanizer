@@ -3,7 +3,6 @@
     <router-link to="/">Home</router-link>
   </div>
   <router-view />
-	<button @click="readFile('hellooooo')">PushMe</button>
 </template>
 
 <script>
@@ -12,25 +11,9 @@ import { defineComponent, onMounted } from 'vue'
 export default defineComponent({
   setup() {
     onMounted(() => {
-      // handle reply from the backend
-      window.ipc.on('READ_FILE', (payload) => {
-        console.log(payload.content)
-      })
     })
 
-    const readFile = (path) => {
-      // ask backend to read file
-      const payload = { path }
-      console.log(payload)
-      window.ipc.send('READ_FILE', payload)
-    }
-
-    const temp = () => {
-      console.log('testttt')
-    }
-
     return {
-      readFile, temp
     }
   },
 })
