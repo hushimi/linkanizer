@@ -9,13 +9,13 @@
 import { defineComponent, onMounted } from 'vue'
 
 export default defineComponent({
-  setup() {
-    onMounted(() => {
-    })
+	setup() {
+		onMounted(() => {
+		})
 
-    return {
-    }
-  },
+		return {
+		}
+	},
 })
 </script>
 

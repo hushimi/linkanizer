@@ -12,34 +12,34 @@ import { defineComponent, computed } from 'vue'
 import { findIconDefinition } from '@fortawesome/fontawesome-svg-core'
 
 export default defineComponent({
-  name: 'FontAwesomeIcon',
+	name: 'FontAwesomeIcon',
 
-  props: {
-    icon: {
-      type: String,
-      required: true
-    },
-    type: {
-      type: String,
-      default: 'fas',
-      required: false
-    },
-    class: String
-  },
+	props: {
+		icon: {
+			type: String,
+			required: true
+		},
+		type: {
+			type: String,
+			default: 'fas',
+			required: false
+		},
+		class: String
+	},
 
-  setup(props) {
-    const width = computed(() => definition.value.icon[0])
-    const height = computed(() => definition.value.icon[1])
-    const svgPath = computed(() => definition.value.icon[4])
+	setup(props) {
+		const width = computed(() => definition.value.icon[0])
+		const height = computed(() => definition.value.icon[1])
+		const svgPath = computed(() => definition.value.icon[4])
 
-    const definition = computed(() =>
-      findIconDefinition({
-        prefix: props.type,
-        iconName: props.icon
-      })
-    )
+		const definition = computed(() =>
+			findIconDefinition({
+				prefix: props.type,
+				iconName: props.icon
+			})
+		)
 
-    return { width, height, svgPath }
-  }
+		return { width, height, svgPath }
+	}
 })
 </script>

@@ -9,7 +9,12 @@
 
 ## Libraries
 
-- os-utils
+- os-utils: 0.0.14
+- tailwind
+
+```bash
+yarn add tailwindcss@npm:@tailwindcss/postcss7-compat @tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9
+```
 
 # setup memo
 
@@ -35,6 +40,7 @@ yarn run electron:build
 - BackEnd Process: background/main.js
 - Renderer Process: renderer/main.js(display vuejs content)
 - Use ContextBridge to communicate with BackGroundProcess(preload.js)
+- Icon size => 512x512
 - set up IPC func
   1. add channel on preload.js
   2. add IPC handler at background/main.js
@@ -47,3 +53,5 @@ yarn run electron:build
 - [Electron Document](https://www.electronjs.org/ja/docs/latest/api/app)
 - [Setup Electron and vue](https://medium.com/swlh/how-to-safely-set-up-an-electron-app-with-vue-and-webpack-556fb491b83)
 - [fontawesome](https://byceclorets.com/vue/font-awesome/)
+- [Open External File](https://stackoverflow.com/questions/30381450/open-external-file-with-electron)
+- [set app icon](https://blog.katsubemakito.net/nodejs/electron/app-icon)

@@ -10,7 +10,7 @@ module.exports = {
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    // タグの最後で改行しないで
+    // タグの最後で改行しない
     'vue/html-closing-bracket-newline': [2, {'multiline': 'never'}],
     // 不要なカッコは消す
     'no-extra-parens': 1,
@@ -28,8 +28,8 @@ module.exports = {
     'quotes': [2, 'single'],
     // varは禁止
     'no-var': 2,
-    // jsのインデントは２
-    'indent': [2, 2],
+    // jsのインデントはタブ
+    'indent': ['error', 'tab'],
     // かっこの中はスペースなし
     'space-in-parens': [2, 'never'],
     // カンマの前後にスペース入れる？

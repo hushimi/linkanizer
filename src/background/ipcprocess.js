@@ -7,9 +7,9 @@ const os = require('os-utils')
  * ----------------------------------------------
  */
 function getUsage() {
-  console.log((os.freememPercentage() * 100).toFixed(2))
+	console.log((os.freememPercentage() * 100).toFixed(2))
 }
 
 module.exports = {
-  getUsage
+	getUsage
 }

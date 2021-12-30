@@ -2,6 +2,7 @@ const { contextBridge, ipcRenderer } = require('electron')
 
 const validChannels = [
   'usage',
+  'open',
 ]
 
 contextBridge.exposeInMainWorld(
