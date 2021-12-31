@@ -21,8 +21,11 @@ protocol.registerSchemesAsPrivileged([
 // ------------------------------------
 async function createWindow() {
 	const mainWindow = new BrowserWindow({
-		width: 1200,
-		height: 800,
+		width: 960,
+		height: 593,
+		minimizable: false,
+		maximizable: false,
+		resizable: false,
 		backgroundColor: '#fff',
 		icon: __dirname + '/../src/renderer/assets/image/appIcon.png',
 		webPreferences: {
