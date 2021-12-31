@@ -1,6 +1,8 @@
 {
   "name": "linkanizer",
   "version": "0.1.0",
+  "author": "KosukeFushimi <mowmow.meganekun@gmail.com> (https://github.com/hushimi)",
+  "description": "Desktop Link organizer",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -24,6 +26,7 @@
     "core-js": "^3.6.5",
     "os-utils": "^0.0.14",
     "postcss": "^7",
+    "sqlite3": "^5.0.2",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
@@ -42,6 +45,7 @@
     "babel-eslint": "^10.1.0",
     "electron": "^13.0.0",
     "electron-devtools-installer": "^3.1.0",
+    "electron-rebuild": "^3.2.5",
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^7.0.0",

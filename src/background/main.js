@@ -1,14 +1,13 @@
 'use strict'
-
-import { app, protocol, BrowserWindow, shell } from 'electron'
-import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
-
+const {app, protocol, BrowserWindow, shell, ipcMain} = require('electron')
+const {createProtocol} = require('vue-cli-plugin-electron-builder/lib')
 const isDevelopment = process.env.NODE_ENV !== 'production'
-const { ipcMain } = require('electron')
+
 const os = require('os-utils')
 const path = require('path')
-// const ipcProc = require('./ipcprocess')
+const common = require('./common')
+const db = require('./db')
 
 // ------------------------------------
 // スキーマ作成
@@ -22,9 +21,10 @@ protocol.registerSchemesAsPrivileged([
 // ------------------------------------
 async function createWindow() {
 	const mainWindow = new BrowserWindow({
-		backgroundColor: '#fff',
 		width: 1200,
-		height: 1000,
+		height: 800,
+		backgroundColor: '#fff',
+		icon: __dirname + '/../src/renderer/assets/image/appIcon.png',
 		webPreferences: {
 			// Required for Spectron testing
 			enableRemoteModule: !!process.env.IS_TEST,
@@ -40,9 +40,15 @@ async function createWindow() {
 		await mainWindow.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
 		if (!process.env.IS_TEST) mainWindow.webContents.openDevTools()
 	} else {
-		createProtocol('app')
 		// Load the index.html when not in development
+		createProtocol('app')
 		mainWindow.loadURL('app://./index.html')
+	}
+
+	let isDBExist = common.checkFileExists(__dirname + '/../linkanizer.db')
+	if (!isDBExist) {
+		console.log('create table')
+		db.createTable()
 	}
 
 	// PCリソース読み込み
@@ -78,8 +84,8 @@ app.on('activate', () => {
 // ------------------------------------
 app.on('ready', async () => {
 	if (isDevelopment && !process.env.IS_TEST) {
-		// Install Vue Devtools
 		try {
+			// Install Vue Devtools
 			await installExtension(VUEJS3_DEVTOOLS)
 		} catch (e) {
 			console.error('Vue Devtools failed to install:', e.toString())
@@ -105,7 +111,6 @@ if (isDevelopment) {
 
 // -----------------------------------------
 // IPC通信処理
-// TODO write process on external file
 // -----------------------------------------
 // リンクオープン
 ipcMain.on('open', async (event, payload) => {
