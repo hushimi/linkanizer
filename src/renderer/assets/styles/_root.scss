@@ -4,6 +4,9 @@
 // ----------------------------------
 // デフォルトスタイル修正
 // ----------------------------------
+* {
+  outline: none !important;
+}
 html {
   box-sizing: border-box;
   height: 100%;
@@ -12,10 +15,6 @@ body {
   height: 100%;
   background: $primary;
   color: $accent;
-  padding: 6px;
-}
-* {
-  outline: none !important;
 }
 a {
   text-decoration: none;
@@ -39,10 +38,6 @@ input[type="text"]:focus {
 .fa-icon {
   height: 24px;
   width: 24px;
-  color: $accent;
-}
-
-#home {
   color: $accent;
 }
 
