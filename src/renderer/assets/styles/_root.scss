@@ -9,12 +9,15 @@
 }
 html {
   box-sizing: border-box;
-  height: 100%;
+  height: calc(100% - 30px);
 }
 body {
-  height: 100%;
-  background: $primary;
+  height: calc(100% - 30px);
+  background: #151716;
   color: $accent;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 a {
   text-decoration: none;

@@ -55,3 +55,6 @@ yarn run electron:build
 - [fontawesome](https://byceclorets.com/vue/font-awesome/)
 - [Open External File](https://stackoverflow.com/questions/30381450/open-external-file-with-electron)
 - [set app icon](https://blog.katsubemakito.net/nodejs/electron/app-icon)
+- [Tree Structure in RDB](https://www.wantedly.com/companies/tutorial/post_articles/299434)
+- [Tree Structure in RDB](https://katsusand.dev/posts/rdb-folder/)
+- [Create Own Menu Bar](https://dev.to/saisandeepvaddi/creating-a-custom-menu-bar-in-electron-1pi3)

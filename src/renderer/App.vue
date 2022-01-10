@@ -1,17 +1,21 @@
 <template>
-	<div class="flex flex-nowrap w-full h-full">
-		<Navigation class="h-full w-2/6 border-2 border-red-500" />
-		<router-view />
-	</div>
+    <div class="w-full h-full">
+        <Menubar />
+        <div class="flex flex-nowrap w-full view-container">
+            <Navigation class="h-full w-2/6" />
+            <router-view />
+        </div>
+    </div>
 </template>
 
 <script>
 import { defineComponent, onMounted } from 'vue'
 import Navigation from '@/renderer/components/Navigation'
+import Menubar from '@/renderer/components/Menubar'
 
 export default defineComponent({
 	components: {
-		Navigation
+		Navigation, Menubar
 	},
 	setup() {
 		onMounted(() => {
@@ -30,7 +34,14 @@ export default defineComponent({
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  height: 100%;
+  height: calc(100% - 30px);
+}
+
+.view-container {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    height: calc(100% - 30px);
 }
 
 // #nav {

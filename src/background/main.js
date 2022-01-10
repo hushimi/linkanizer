@@ -23,9 +23,9 @@ async function createWindow() {
 	const mainWindow = new BrowserWindow({
 		width: 960,
 		height: 593,
-		minimizable: false,
 		maximizable: false,
 		resizable: false,
+		frame: false,
 		backgroundColor: '#fff',
 		icon: __dirname + '/../src/renderer/assets/image/appIcon.png',
 		webPreferences: {

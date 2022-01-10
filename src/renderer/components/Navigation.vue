@@ -59,7 +59,7 @@ export default defineComponent({
     height: 100%;
     padding: 5px;
     color: $gray;
-    background-color: #161c2e;
+    background-color: $menu;
     overflow-y: scroll;
     &::-webkit-scrollbar {
         display: none;
