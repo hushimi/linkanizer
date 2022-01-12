@@ -2,6 +2,8 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Search from '../views/Search.vue'
 import News from '../views/News.vue'
+import ToDo from '../views/ToDo.vue'
+import TextGen from '../views/TextGen.vue'
 
 const routes = [
 	{
@@ -15,9 +17,19 @@ const routes = [
 		component: Search,
 	},
 	{
+		path: '/todo',
+		name: 'ToDo',
+		component: ToDo,
+	},
+	{
 		path: '/news',
 		name: 'News',
 		component: News,
+	},
+	{
+		path: '/textgen',
+		name: 'TextGen',
+		component: TextGen,
 	},
 ]
 
