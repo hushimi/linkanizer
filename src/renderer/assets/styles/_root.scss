@@ -13,7 +13,7 @@ html {
 }
 body {
   height: calc(100% - 30px);
-  background: #151716;
+  background: $primary;
   color: $accent;
   &::-webkit-scrollbar {
     display: none;

@@ -40,7 +40,7 @@ export default defineComponent({
     top: 0;
     left: 0;
     background-color: $menu;
-    border-bottom: 2px solid $gray;
+    border-bottom: 2px solid $menu;
     .app-icon {
         width: 24px;
         height: 24px;
