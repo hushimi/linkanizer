@@ -8,7 +8,7 @@
 
         <!-- Search Accordion -->
         <div class="accordion mb-4 navlink">
-            <div class="accordion-item">
+            <div class="accordion-item" @click="toggleSearch" ref="accordion">
                 <h3 class="accordion-title">
                     <fa icon="search" class="fa-icon" />
                     <p class="pl-3 mr-auto w-full text-left">Search</p>
@@ -18,19 +18,22 @@
                 <!-- Form -->
                 <div class="search-form">
                     <div class="text-white mb-4">
-                        <label class="search-label s-form">Search By Link Title</label>
-                        <input type="text" class="search-input w-full s-form">
+                        <label class="search-label">Search By Link Title</label>
+                        <input type="text" class="search-input w-full">
                     </div>
                     <div class="text-white mb-4">
-                        <label class="search-label s-form">Search By Link</label>
-                        <input type="text" class="search-input w-full s-form">
+                        <label class="search-label">Search By Link</label>
+                        <input type="text" class="search-input w-full">
                     </div>
                     <div class="text-white mb-4">
-                        <label class="search-label s-form">Search By Tag Name</label>
-                        <input type="text" class="search-input w-full s-form">
+                        <label class="search-label">Search By Tag Name</label>
+                        <input type="text" class="search-input w-full">
                     </div>
 
-                    <button class="search-btn">Search</button>
+                    <RippleBtn class="mx-auto"
+                        :width="'120px'"
+                        :text="'SEARCH'"
+                        @btnclick="searchClick"/>
                 </div>
             </div>
         </div>
@@ -56,28 +59,54 @@
 </template>
 
 <script>
-import { defineComponent, onMounted } from 'vue'
+import { defineComponent, onMounted, ref } from 'vue'
+import RippleBtn from '@/renderer/components/RippleBtn.vue'
 
 export default defineComponent({
+	components: {
+		RippleBtn
+	},
+
 	setup() {
 		onMounted(() => {
-			// アコーディオンイベント追加
-			const accordionItem = document.querySelectorAll('.accordion-item')
-			accordionItem.forEach((el) =>
-				el.addEventListener('click', (event) => {
-					const parent = event.target.parentNode
-					if (el.classList.contains('active') &&
-                        parent.classList.contains('accordion-title')
-					) {
-						el.classList.remove('active')
-					} else {
-						accordionItem.forEach((el2) => el2.classList.remove('active'))
-						el.classList.add('active')
-					}
-				})
-			)
 		})
 
+		// -----------------------------------------------
+		// ライブラリ・DOMエレメント
+		// -----------------------------------------------
+		const accordion = ref(null)
+
+		// -----------------------------------------------
+		// クリック時動作
+		// -----------------------------------------------
+		/**
+         * Searchメニュークリック
+         */
+		const toggleSearch = (event) => {
+			const parent = event.target.parentNode
+			if (accordion.value.classList.contains('active') &&
+                parent.classList.contains('accordion-title')
+			) {
+				accordion.value.classList.remove('active')
+			} else {
+				accordion.value.classList.add('active')
+			}
+		}
+
+		/**
+         * 検索ボタンクリック
+         */
+		const searchClick = () => {
+			console.log('search clicked')
+		}
+
+		return {
+			// 関数
+			searchClick, toggleSearch,
+
+			// ref
+			accordion
+		}
 	},
 })
 </script>
@@ -85,7 +114,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 $navcolor: #9e9e9e;
 $navactive: #18F1DE;
-$searchactive: #E9464A;
+$searchactive: #e013b3;
 
 #navigation {
     height: 100%;
@@ -107,6 +136,25 @@ $searchactive: #E9464A;
         color: $navcolor;
         .fa-icon {
             color: $navcolor;
+        }
+    }
+
+    // フォームスタイル
+    .search-form {
+        width: calc(100% - 36px);
+        margin-left: 36px;
+        display: none;
+        color: $accent;
+        font-size: 0.8rem;
+        text-align: left;
+
+        .search-input {
+            padding: 0 10px;
+            line-height: 28px;
+            height: 30px;
+            border-radius: 10px;
+            background: #404751;
+            color: #fff;
         }
     }
 
@@ -136,27 +184,7 @@ $searchactive: #E9464A;
                 }
             }
 
-            // フォームスタイル
-            .search-form {
-                width: calc(100% - 36px);
-                margin-left: 36px;
-                display: none;
-                color: $accent;
-                font-size: 0.8rem;
-                text-align: left;
-
-                .search-btn {
-                    display: block;
-                    margin: 0 auto;
-                    width: 120px;
-                    padding: 5px;
-                    font-weight: bold;
-                    border-radius: 10px;
-                    background: $navactive;
-                    color: #1E192E;
-                }
-            }
-
+            // Search clicked action
             &.active {
                 .accordion-title {
                     color: $searchactive;

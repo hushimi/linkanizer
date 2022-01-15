@@ -22,17 +22,26 @@ body {
 a {
   text-decoration: none;
 }
-input[type="radio"]:focus {
-  outline: none;
-  box-shadow: none;
+input {
+  border: none;
+  &[type="radio"]:focus {
+    outline: none;
+    box-shadow: none;
+    border: none;
+  }
+  &[type="checkbox"]:focus {
+    outline: none;
+    box-shadow: none;
+    border: none;
+  }
+  &[type="text"]:focus {
+    outline: none;
+    box-shadow: none;
+    border: none;
+  }
 }
-input[type="checkbox"]:focus {
-  outline: none;
-  box-shadow: none;
-}
-input[type="text"]:focus {
-  outline: none;
-  box-shadow: none;
+button {
+  border: none;
 }
 
 // ----------------------------------
