@@ -9,10 +9,13 @@
 
         <!-- Minimize, Closeボタン -->
         <div class="btn-box h-full flex items-center">
-            <div class="minimize-btn menu-btn h-full flex items-center">
+            <div class="minimize-btn menu-btn h-full flex items-center"
+                @click="minimize">
                 <fa icon="minus" class="fa-icon text-white m-auto" />
             </div>
-            <div class="close-btn menu-btn h-full flex items-center">
+
+            <div class="close-btn menu-btn h-full flex items-center"
+                @click="close">
                 <fa icon="times" class="fa-icon text-white m-auto" />
             </div>
         </div>
@@ -24,7 +27,21 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
 	setup() {
+		// --------------------------------------------
+		// IPC通信送信処理
+		// --------------------------------------------
+		const minimize = () => {
+			window.ipc.send('minimize')
+		}
 
+		const close = () => {
+			window.ipc.send('appclose')
+		}
+
+		return {
+			// Function
+			minimize, close
+		}
 	},
 })
 </script>

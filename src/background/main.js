@@ -9,6 +9,8 @@ const path = require('path')
 const common = require('./common')
 const db = require('./db')
 
+let mainWindow = null
+
 // ------------------------------------
 // スキーマ作成
 // ------------------------------------
@@ -20,38 +22,66 @@ protocol.registerSchemesAsPrivileged([
 // メインウィンドウ作成
 // ------------------------------------
 async function createWindow() {
-	const mainWindow = new BrowserWindow({
+	mainWindow = new BrowserWindow({
 		width: 960,
 		height: 593,
 		maximizable: false,
 		resizable: false,
 		frame: false,
-		backgroundColor: '#fff',
+		show: false,
+		backgroundColor: '#201f25',
 		icon: __dirname + '/../src/renderer/assets/image/appIcon.png',
 		webPreferences: {
 			// Required for Spectron testing
 			enableRemoteModule: !!process.env.IS_TEST,
-
 			nodeIntegration: false,
 			contextIsolation: true,
 			preload: path.resolve(__static, 'preload.js'),
 		},
 	})
 
-	if (process.env.WEBPACK_DEV_SERVER_URL) {
-		// Load the url of the dev server if in development mode
-		await mainWindow.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
-		if (!process.env.IS_TEST) mainWindow.webContents.openDevTools()
-	} else {
-		// Load the index.html when not in development
-		createProtocol('app')
-		mainWindow.loadURL('app://./index.html')
-	}
+	const splash = new BrowserWindow({
+		width: 390,
+		height: 390,
+		frame: false,
+		show: false,
+		maximizable: false,
+		resizable: false,
+		backgroundColor: '#201f25',
+		icon: __dirname + '/../src/renderer/assets/image/appIcon.png',
+	})
 
-	let isDBExist = common.checkFileExists(__dirname + '/../linkanizer.db')
-	if (!isDBExist) {
-		console.log('create table')
-		db.createTable()
+	// コンテンツロード後Windowを開く
+	splash.once('ready-to-show', () => {
+		splash.show()
+	})
+
+	mainWindow.once('ready-to-show', () => {
+		setTimeout(() => {
+			splash.close()
+			mainWindow.show()
+
+			// DBファイルがない場合作成
+			let isDBExist = common.checkFileExists('./linkanizer.db')
+			if (!isDBExist) {
+				db.createTable()
+			}
+		}, 1500)
+	})
+
+	if (process.env.WEBPACK_DEV_SERVER_URL) {
+		// 開発環境
+		mainWindow.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
+		if (!process.env.IS_TEST) mainWindow.webContents.openDevTools()
+		splash.loadURL(process.env.WEBPACK_DEV_SERVER_URL + 'splash.html')
+		splash.center()
+
+	} else {
+		// ビルド後
+		createProtocol('app')
+		splash.loadURL('app://./splash.html')
+		splash.center()
+		mainWindow.loadURL('app://./index.html')
 	}
 
 	// PCリソース読み込み
@@ -82,9 +112,7 @@ app.on('activate', () => {
 	if (BrowserWindow.getAllWindows().length === 0) createWindow()
 })
 
-// ------------------------------------
 // call createWindow when initialization ready
-// ------------------------------------
 app.on('ready', async () => {
 	if (isDevelopment && !process.env.IS_TEST) {
 		try {
@@ -113,10 +141,21 @@ if (isDevelopment) {
 }
 
 // -----------------------------------------
-// IPC通信処理
+// IPC通信受信処理
 // -----------------------------------------
 // リンクオープン
 ipcMain.on('open', async (event, payload) => {
 	const result = await shell.openPath(payload)
 	event.reply('open', result)
+})
+
+// Window最小化
+ipcMain.on('minimize', async () => {
+	let window = BrowserWindow.getFocusedWindow()
+	window.minimize()
+})
+
+// Window閉じる
+ipcMain.on('appclose', async () => {
+	mainWindow.close()
 })

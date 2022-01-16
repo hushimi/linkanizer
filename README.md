@@ -7,15 +7,6 @@
 - vue: 3.0.0
 - electron: 13.0.0
 
-## Libraries
-
-- os-utils: 0.0.14
-- tailwind
-
-```bash
-yarn add tailwindcss@npm:@tailwindcss/postcss7-compat @tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9
-```
-
 # setup memo
 
 ```
@@ -41,12 +32,12 @@ yarn run electron:build
 - Renderer Process: renderer/main.js(display vuejs content)
 - Use ContextBridge to communicate with BackGroundProcess(preload.js)
 - Icon size => 512x512
-- set up IPC func
-  1. add channel on preload.js
-  2. add IPC handler at background/main.js
-  3. when receive data use 'ipcMain.on' or window.ipc.on
-  4. when send data use 'ipcMain.send' or window.ipc.send
-  5. public/preload.js will judge valid channel and execute function
+- mainWindow.once('ready-to-show') never work when using preload
+- tailwind
+
+```bash
+yarn add tailwindcss@npm:@tailwindcss/postcss7-compat @tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9
+```
 
 # Reference
 
@@ -58,3 +49,5 @@ yarn run electron:build
 - [Tree Structure in RDB](https://www.wantedly.com/companies/tutorial/post_articles/299434)
 - [Tree Structure in RDB](https://katsusand.dev/posts/rdb-folder/)
 - [Create Own Menu Bar](https://dev.to/saisandeepvaddi/creating-a-custom-menu-bar-in-electron-1pi3)
+- [Ready to show sample](https://gist.github.com/ckerr/1c515352ed0831e91d9df7e19520655e)
+- [Using google fonts](https://qiita.com/key4_0121/items/0d716818fd3fb1958be6)
