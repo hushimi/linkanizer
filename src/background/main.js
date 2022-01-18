@@ -58,8 +58,8 @@ async function createWindow() {
 
 	mainWindow.once('ready-to-show', () => {
 		setTimeout(() => {
-			// splash.close()
-			// mainWindow.show()
+			splash.close()
+			mainWindow.show()
 
 			// DBファイルがない場合作成
 			let isDBExist = common.checkFileExists('./linkanizer.db')
